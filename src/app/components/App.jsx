@@ -25,10 +25,7 @@ const App = () => {
             <p>This is a simple React application to browse ICE deportation data.</p>
             <StateSelector 
                 states={states} 
-                onSelect={(state) => { 
-                    console.log('Selected state:', state);
-                    setSelectedState(state);
-                }} 
+                onSelect={(state) => setSelectedState(state)} 
             />
             <Apprehensions selectedState={selectedState} />
         </div>

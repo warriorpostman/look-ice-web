@@ -1,0 +1,28 @@
+.project-task {
+    margin: 8px;
+    display: flex;
+    gap: 8px;
+}
+
+.project-task > div {
+    padding: 4px;
+    border: solid 1px;
+}
+
+.project-task > div:first-child {
+    font-weight: bold;
+}
+
+.task-status-high {
+    background-color: #d2623d;
+    color: white;
+}
+
+.task-status-medium {
+    background-color: #f4e94d;
+    color: purple;
+}
+
+.task-status-low {
+    background-color: lightblue;
+}
