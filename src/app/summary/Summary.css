@@ -1,0 +1,11 @@
+.summary-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.summary-container > div {
+    flex: 1;
+    /* flex-basis: 25%; */
+}

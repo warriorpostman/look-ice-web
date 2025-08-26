@@ -1,0 +1,17 @@
+.summary-item {
+    border: solid 1px #ccc;
+    border-radius: 5px;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.summary-chart {
+    flex: 2;
+}
+
+.summary-table {
+    flex-basis:25%;
+    flex: 1 1 auto;
+}
+
