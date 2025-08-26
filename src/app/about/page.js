@@ -3,11 +3,19 @@ import React from 'react';
 const About = () => {
     return (
         <div>
-            <h2>About</h2>
+            <h2>About TODO:NAME</h2>
             <p>
-                This app is purpose-built for exploring deportation data 
-                that was received via FOIA requests by the DeportationData 
-                project.
+                This website was created as a personal project as an exercise
+                data analysis and visualization of data sets which I had .
+            </p>
+            <p>
+                The data used by this website is based on government data 
+                provided by ICE in response to a FOIA request to the Deportation 
+                Data Project analyzed by myself. For more informaation, 
+                see <a 
+                    href="https://deportationdata.org/" target="_blank" rel="noopener noreferrer">
+                        deportationdata.org
+                    </a>.
             </p>
         </div>
     );
