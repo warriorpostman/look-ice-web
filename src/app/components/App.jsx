@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import StateSelector from './StateSelector';
 import Apprehensions from './Apprehensions';
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 const App = () => {
     const [states, setStates] = useState([]);
@@ -10,7 +11,7 @@ const App = () => {
     console.log("Selectedstate:", selectedState);
     useEffect(() => {
         console.log('App component mounted');
-        fetch('http://localhost:8080/api/apprehensions/lists/state')
+        fetch(`${apiUrl}/api/apprehensions/lists/state`)
             .then(response => response.json())
             .then(data => {
                 console.log('Fetched states:', states);
