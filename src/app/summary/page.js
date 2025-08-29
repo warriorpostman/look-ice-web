@@ -13,6 +13,7 @@ export default function Summary() {
         apprehensionsByState: [],
         apprehensionsByGender: [],
         apprehensionsByCriminality: [],
+        apprehensionsByCitizenshipCountry: [],
     });
     useEffect(() => {
         console.log('App component mounted');
@@ -90,6 +91,22 @@ export default function Summary() {
                             datasets: [
                                 {
                                 data: summary.apprehensionsByCriminality.map(values => values[1]), // summary.apprehensionsByState.length > 0 ? summary.apprehensionsByState.map(value => value[1]) : [],
+                                backgroundColor: ['#0088FE', '#00C49F', '#FFBB28'],
+                                },
+                        ],
+                        }} 
+                    />
+                    : <div> Loading... </div>}
+                {summary.apprehensionsByCitizenshipCountry.length !== 0 ?
+                    <SummaryItem 
+                        title="Count By Citizenship/Country" 
+                        labels={summary.apprehensionsByCitizenshipCountry.map(values => values[0])}
+                        values={summary.apprehensionsByCitizenshipCountry.map(values => values[1])}
+                        data={{
+                            labels: summary.apprehensionsByCitizenshipCountry.map(values => values[0]), // summary.apprehensionsByState.length > 0 ? summary.apprehensionsByState.map(value => value[0]) : [],
+                            datasets: [
+                                {
+                                data: summary.apprehensionsByCitizenshipCountry.map(values => values[1]), // summary.apprehensionsByState.length > 0 ? summary.apprehensionsByState.map(value => value[1]) : [],
                                 backgroundColor: ['#0088FE', '#00C49F', '#FFBB28'],
                                 },
                         ],

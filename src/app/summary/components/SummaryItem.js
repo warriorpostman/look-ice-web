@@ -23,7 +23,7 @@ const SummaryItem = ({ title, labels, values }) => {
         <div className="summary-item">
             <div className="summary-table">
                 <table>
-                    <thead><th>STATE</th><th>Count</th></thead>
+                    <thead><tr><th>STATE</th><th>Count</th></tr></thead>
                     <tbody>
                         {labels.map((label, index) => (
                             <tr key={label}>
