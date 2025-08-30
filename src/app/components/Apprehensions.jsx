@@ -7,6 +7,7 @@ import {
   flexRender,
   getPaginationRowModel,
 } from "@tanstack/react-table";
+import PagedTable from './PagedTable';
 import PropTypes from 'prop-types';
 import ProjectTask from './ProjectTask';
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -16,17 +17,17 @@ import './Apprehensions.css';
 
 const Apprehensions = ({ selectedState }) => {
     const [apprehensions, setApprehensions] = useState([]);
-    const columns = React.useMemo(
-        () => [
-        { header: "ID", accessorKey: "arrestId" },
-        { header: "Gender", accessorKey: "gender" },
-        { header: "Appr. Date", accessorKey: "apprehensionDate" },
-        { header: "Appr. Criminality", accessorKey: "apprehensionCriminality" },
-        { header: "Appr. Method", accessorKey: "apprehensionMethod" },
-        { header: "Citizenship Country", accessorKey: "citizenshipCountry" },
-        ],
-        []
-    );
+    // const columns = React.useMemo(
+    //     () => [
+    //     { header: "ID", accessorKey: "arrestId" },
+    //     { header: "Gender", accessorKey: "gender" },
+    //     { header: "Appr. Date", accessorKey: "apprehensionDate" },
+    //     { header: "Appr. Criminality", accessorKey: "apprehensionCriminality" },
+    //     { header: "Appr. Method", accessorKey: "apprehensionMethod" },
+    //     { header: "Citizenship Country", accessorKey: "citizenshipCountry" },
+    //     ],
+    //     []
+    // );
 
     // TODO: Make this dynamic.
     const totalCount = 265226;
@@ -36,24 +37,13 @@ const Apprehensions = ({ selectedState }) => {
         pageSize: 10,
     });
 
-    const table = useReactTable({
-        data: apprehensions,
-        columns,
-        pageCount: Math.ceil(totalCount / pagination.pageSize), // required for server-side
-        state: { pagination },
-        onPaginationChange: setPagination,
-        manualPagination: true, // tells TanStack you’re controlling it
-        getCoreRowModel: getCoreRowModel(),
-        getPaginationRowModel: getPaginationRowModel(), // still needed for UI helpers        getCoreRowModel: getCoreRowModel(),
-    });
-
     useEffect(() => {
         const start = (pagination.pageIndex * pagination.pageSize) + pagination.pageSize;
         fetch(`${apiUrl}/api/apprehensions` + 
             `?state=${selectedState}&start=${start}&end=${start + pagination.pageSize}`)
             .then(response => response.json())
             .then(data => {
-                console.log('Fetched apprehensions:', data);
+                // console.log('Fetched apprehensions:', data);
                 setApprehensions(data);
             })
             .catch(error => {
@@ -90,44 +80,20 @@ const Apprehensions = ({ selectedState }) => {
                 <p>No apprehensions found.</p>
             }
 
-            <div style={{ marginTop: "1rem" }}>
-                <button onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
-                Previous
-                </button>
-                <span>
-                Page {pagination.pageIndex + 1} of {table.getPageCount()}
-                </span>
-                <button onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
-                Next
-                </button>
-            </div>
-            <table>
-                <thead>
-                    {table.getHeaderGroups().map((headerGroup) => (
-                    <tr key={headerGroup.id}>
-                        {headerGroup.headers.map((header) => (
-                        <th key={header.id}>
-                            {flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                            )}
-                        </th>
-                        ))}
-                    </tr>
-                    ))}
-                </thead>
-                <tbody>
-                    {table.getRowModel().rows.map((row) => (
-                    <tr key={row.id}>
-                        {row.getVisibleCells().map((cell) => (
-                        <td key={cell.id}>
-                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                        </td>
-                        ))}
-                    </tr>
-                    ))}
-                </tbody>
-            </table>
+            <PagedTable 
+                onTablePaginationChange={(updaterFunc) => {
+                    const newState = updaterFunc(pagination);
+                    setPagination(newState);
+                }}
+                headers={[{ header: "ID", accessorKey: "arrestId" },
+                    { header: "Gender", accessorKey: "gender" },
+                    { header: "Appr. Date", accessorKey: "apprehensionDate" },
+                    { header: "Appr. Criminality", accessorKey: "apprehensionCriminality" },
+                    { header: "Appr. Method", accessorKey: "apprehensionMethod" },
+                    { header: "Citizenship Country", accessorKey: "citizenshipCountry" },]
+                }
+                tableData={apprehensions}
+            />
         </div>
     );
 };
