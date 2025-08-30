@@ -25,9 +25,9 @@ const PagedTable = ({ headers, tableData, onTablePaginationChange }) => {
         columns,
         pageCount: Math.ceil(totalCount / pagination.pageSize), // required for server-side
         state: { pagination },
-        onPaginationChange: (stuff) => { 
-            onTablePaginationChange(stuff)
-            setPagination(stuff); 
+        onPaginationChange: (updaterFunc) => { 
+            onTablePaginationChange(updaterFunc)
+            setPagination(updaterFunc); 
         },
         manualPagination: true, // tells TanStack you’re controlling it
         getCoreRowModel: getCoreRowModel(),
