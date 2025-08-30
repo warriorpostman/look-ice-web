@@ -5,6 +5,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 ChartJS.register(ArcElement, Tooltip, Legend);
 import SummaryItem from './components/SummaryItem';
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 import './Summary.css';
 
@@ -17,7 +18,7 @@ export default function Summary() {
     });
     useEffect(() => {
         console.log('App component mounted');
-        fetch('http://localhost:8080/api/apprehensions/summary')
+        fetch(`${apiUrl}/api/apprehensions/summary`)
             .then(response => response.json())
             .then(data => {
                 console.log('Fetched summary:', data);
