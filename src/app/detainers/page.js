@@ -15,7 +15,7 @@ export default function Detainers() {
     const columns = React.useMemo(
         () => [
         { header: "ID", accessorKey: "detainerId" },
-        // { header: "Gender", accessorKey: "gender" },
+        { header: "Gender", accessorKey: "gender" },
         { header: "Appr. Date", accessorKey: "apprehensionDate" },
         { header: "Det. Prep. Criminality", accessorKey: "detainerPreparedCriminality" },
         { header: "Appr. Method", accessorKey: "apprehensionMethod" },
