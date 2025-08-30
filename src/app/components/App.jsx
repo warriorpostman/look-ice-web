@@ -12,6 +12,7 @@ const App = () => {
                 <li><Link href="/apprehensions">View Apprehensions</Link></li>
                 <li><Link href="/detainers">View Detainers</Link></li>
                 <li><Link href="/summary">Charts</Link></li>
+                <li><Link href="/about">About</Link></li>
             </ul>
         </div>
     );

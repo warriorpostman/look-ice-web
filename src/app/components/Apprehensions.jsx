@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-table";
 import PropTypes from 'prop-types';
 import ProjectTask from './ProjectTask';
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 import './Apprehensions.css';
 
@@ -48,9 +49,7 @@ const Apprehensions = ({ selectedState }) => {
     useEffect(() => {
         console.log('Apprehensions component mounted with state:', selectedState);
         const start = (pagination.pageIndex * pagination.pageSize) + pagination.pageSize;
-        // Replace with your actual API endpoint
-        // fetch(`http://localhost:5117/api/apprehensions?state=${selectedState}`)
-        fetch(`http://localhost:8080/api/apprehensions` + 
+        fetch(`${apiUrl}/api/apprehensions` + 
             `?state=${selectedState}&start=${start}&end=${start + pagination.pageSize}`)
             .then(response => response.json())
             .then(data => {
