@@ -3,7 +3,7 @@ import React from 'react';
 const About = () => {
     return (
         <div>
-            <h2>About TODO:NAME</h2>
+            <h2>About lookice</h2>
             <p>
                 This website was created as a personal project as an exercise
                 data analysis and visualization of data sets which I had .

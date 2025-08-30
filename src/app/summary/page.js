@@ -5,6 +5,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 ChartJS.register(ArcElement, Tooltip, Legend);
 import SummaryItem from './components/SummaryItem';
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 import './Summary.css';
 
@@ -13,10 +14,11 @@ export default function Summary() {
         apprehensionsByState: [],
         apprehensionsByGender: [],
         apprehensionsByCriminality: [],
+        apprehensionsByCitizenshipCountry: [],
     });
     useEffect(() => {
         console.log('App component mounted');
-        fetch('http://localhost:8080/api/apprehensions/summary')
+        fetch(`${apiUrl}/api/apprehensions/summary`)
             .then(response => response.json())
             .then(data => {
                 console.log('Fetched summary:', data);
@@ -90,6 +92,22 @@ export default function Summary() {
                             datasets: [
                                 {
                                 data: summary.apprehensionsByCriminality.map(values => values[1]), // summary.apprehensionsByState.length > 0 ? summary.apprehensionsByState.map(value => value[1]) : [],
+                                backgroundColor: ['#0088FE', '#00C49F', '#FFBB28'],
+                                },
+                        ],
+                        }} 
+                    />
+                    : <div> Loading... </div>}
+                {summary.apprehensionsByCitizenshipCountry.length !== 0 ?
+                    <SummaryItem 
+                        title="Count By Citizenship/Country" 
+                        labels={summary.apprehensionsByCitizenshipCountry.map(values => values[0])}
+                        values={summary.apprehensionsByCitizenshipCountry.map(values => values[1])}
+                        data={{
+                            labels: summary.apprehensionsByCitizenshipCountry.map(values => values[0]), // summary.apprehensionsByState.length > 0 ? summary.apprehensionsByState.map(value => value[0]) : [],
+                            datasets: [
+                                {
+                                data: summary.apprehensionsByCitizenshipCountry.map(values => values[1]), // summary.apprehensionsByState.length > 0 ? summary.apprehensionsByState.map(value => value[1]) : [],
                                 backgroundColor: ['#0088FE', '#00C49F', '#FFBB28'],
                                 },
                         ],

@@ -7,6 +7,7 @@ import {
   flexRender,
   getPaginationRowModel,
 } from "@tanstack/react-table";
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export default function Detainers() {
     const selectedState = "ALABAMA";
@@ -14,7 +15,7 @@ export default function Detainers() {
     const columns = React.useMemo(
         () => [
         { header: "ID", accessorKey: "detainerId" },
-        { header: "Gender", accessorKey: "gender" },
+        // { header: "Gender", accessorKey: "gender" },
         { header: "Appr. Date", accessorKey: "apprehensionDate" },
         { header: "Det. Prep. Criminality", accessorKey: "detainerPreparedCriminality" },
         { header: "Appr. Method", accessorKey: "apprehensionMethod" },
@@ -45,9 +46,7 @@ export default function Detainers() {
     useEffect(() => {
         console.log('Detainers component mounted with state:', selectedState);
         const start = (pagination.pageIndex * pagination.pageSize) + pagination.pageSize;
-        // Replace with your actual API endpoint
-        // fetch(`http://localhost:5117/api/apprehensions?state=${selectedState}`)
-        fetch(`http://localhost:8080/api/detainers` + 
+        fetch(`${apiUrl}/api/detainers` + 
             `?state=${selectedState}&start=${start}&end=${start + pagination.pageSize}`)
             .then(response => response.json())
             .then(data => {
