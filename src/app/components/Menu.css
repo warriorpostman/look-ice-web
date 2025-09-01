@@ -1,0 +1,22 @@
+.li-menu > ul {
+    list-style: none;
+    margin: 8px;
+    padding: 8px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    /* width: 220px; */
+}
+
+li.menu > ul > li {
+    cursor: pointer;
+}
+
+li.menu > ul > li > a:hover {
+    text-decoration: underline;
+    color: #333;
+}
+
+li.menu > ul > li:hover {
+    background-color: #e2e6ea;
+}

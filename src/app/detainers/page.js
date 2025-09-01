@@ -17,7 +17,7 @@ export default function Detainers() {
         console.log('Detainers component mounted with state:', selectedState);
         const start = (pagination.pageIndex * pagination.pageSize) + pagination.pageSize;
         fetch(`${apiUrl}/api/detainers` + 
-            `?state=${selectedState}&start=${start}&end=${start + pagination.pageSize}`)
+            `?state=${selectedState}&start=${start}&end=${start + pagination.pageSize}&pageNumber=${pagination.pageIndex}`)
             .then(response => response.json())
             .then(data => {
                 console.log('Fetched detainers:', data);

@@ -1,33 +1,18 @@
 // create a React component that renders a table with data called apprehensions. It should accept a prop called "selectedState". In the useEffect, you can do a basic fetch GET and just provide a dummy URL which I'll fill in later.
 'use client';
 import React, { useEffect, useState } from 'react';
-import {
-  useReactTable,
-  getCoreRowModel,
-  flexRender,
-  getPaginationRowModel,
-} from "@tanstack/react-table";
 import PagedTable from './PagedTable';
 import PropTypes from 'prop-types';
+import StateSelector from '../components/StateSelector';
 import ProjectTask from './ProjectTask';
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 const isDevelopment = process.env.NEXT_PUBLIC_IS_DEVELOPMENT === 'true';
 
 import './Apprehensions.css';
 
-const Apprehensions = ({ selectedState }) => {
+const Apprehensions = () => {
+    // console.log({ selectedState });
     const [apprehensions, setApprehensions] = useState([]);
-    // const columns = React.useMemo(
-    //     () => [
-    //     { header: "ID", accessorKey: "arrestId" },
-    //     { header: "Gender", accessorKey: "gender" },
-    //     { header: "Appr. Date", accessorKey: "apprehensionDate" },
-    //     { header: "Appr. Criminality", accessorKey: "apprehensionCriminality" },
-    //     { header: "Appr. Method", accessorKey: "apprehensionMethod" },
-    //     { header: "Citizenship Country", accessorKey: "citizenshipCountry" },
-    //     ],
-    //     []
-    // );
 
     // TODO: Make this dynamic.
     const totalCount = 265226;
@@ -36,14 +21,26 @@ const Apprehensions = ({ selectedState }) => {
         pageIndex: 0, // starts at 0
         pageSize: 10,
     });
+    const [states, setStates] = useState([]);
+    const [selectedState, setSelectedState] = useState('ALABAMA');
 
     useEffect(() => {
+
+        if (!states || states.length === 0) {
+            fetch(`${apiUrl}/api/apprehensions/lists/state`)
+                .then(response => response.json())
+                .then(data => {
+                    setStates(data);
+                })
+                .catch(error => {
+                    console.error('Error fetching states:', error);
+                });
+        }         
         const start = (pagination.pageIndex * pagination.pageSize) + pagination.pageSize;
         fetch(`${apiUrl}/api/apprehensions` + 
-            `?state=${selectedState}&start=${start}&end=${start + pagination.pageSize}`)
+            `?state=${selectedState}&start=${start}&end=${start + pagination.pageSize}&pageNumber=${pagination.pageIndex}`)
             .then(response => response.json())
             .then(data => {
-                // console.log('Fetched apprehensions:', data);
                 setApprehensions(data);
             })
             .catch(error => {
@@ -79,11 +76,18 @@ const Apprehensions = ({ selectedState }) => {
             {apprehensions.length === 0 &&
                 <p>No apprehensions found.</p>
             }
+            <StateSelector 
+                states={states} 
+                onSelect={(state) => {
+
+                    setSelectedState(state);
+                }}
+            />
 
             <PagedTable 
                 onTablePaginationChange={(updaterFunc) => {
-                    const newState = updaterFunc(pagination);
-                    setPagination(newState);
+                    const newPagination = updaterFunc(pagination);
+                    setPagination(newPagination);
                 }}
                 headers={[{ header: "ID", accessorKey: "arrestId" },
                     { header: "Gender", accessorKey: "gender" },
