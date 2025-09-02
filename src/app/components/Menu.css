@@ -1,0 +1,21 @@
+.li-menu > ul {
+    margin: 8px;
+    padding: 8px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.li-menu >ul > li {
+    width: 100%;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.li-menu > ul > li > a:hover {
+    color: black;
+}
+
+.li-menu > ul > li:hover {
+    width: 100%;
+    background-color: lightgray;
+}
