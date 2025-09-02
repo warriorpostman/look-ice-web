@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   useReactTable,
   getCoreRowModel,
@@ -7,14 +7,16 @@ import {
 } from "@tanstack/react-table";
 import './PagedTable.css';
 
-const PagedTable = ({ headers, tableData, onTablePaginationChange }) => {
+const PagedTable = ({ headers, dataUrl }) => {
     const [pagination, setPagination] = useState({
         pageIndex: 0, // starts at 0
         pageSize: 10,
     });
+    const [tableData, setTableData] = useState([]);
+
 
     // TODO: Make this dynamic.
-    const totalCount = 265226;
+    const totalCount = 40000;
     const columns = React.useMemo(
         () => headers,
         []
@@ -26,13 +28,37 @@ const PagedTable = ({ headers, tableData, onTablePaginationChange }) => {
         pageCount: Math.ceil(totalCount / pagination.pageSize), // required for server-side
         state: { pagination },
         onPaginationChange: (updaterFunc) => { 
-            onTablePaginationChange(updaterFunc)
-            setPagination(updaterFunc); 
+            fetch(dataUrl + `&pageNumber=${pagination.pageIndex}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Fetched apprehensions:', data);
+                    setTableData(data);
+                })
+                .catch(error => {
+                    console.error('Error fetching apprehensions:', error);
+                });
+                setPagination(updaterFunc); 
         },
-        manualPagination: true, // tells TanStack you’re controlling it
+        manualPagination: true, 
         getCoreRowModel: getCoreRowModel(),
         getPaginationRowModel: getPaginationRowModel(), // still needed for UI helpers        getCoreRowModel: getCoreRowModel(),
     });
+
+    useEffect(() => {
+        fetch(`${dataUrl}&pageNumber=${pagination.pageIndex}`
+        ).then(response => response.json())
+            .then(data => {
+                console.log('Fetched apprehensions:', data);
+                setTableData(data);
+            })
+            .catch(error => {
+                console.error('Error fetching apprehensions:', error);
+            });
+        setPagination({
+            pageIndex: 0,
+            pageSize: 10,
+        });
+    }, [dataUrl]);
 
 
     return (

@@ -22,9 +22,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <h1>lookice</h1> 
         <div style={{ display: 'flex' }}>
           <div>
-            <h1>lookice</h1> 
             <Menu />
           </div>
           {children}

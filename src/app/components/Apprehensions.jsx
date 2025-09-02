@@ -11,16 +11,6 @@ const isDevelopment = process.env.NEXT_PUBLIC_IS_DEVELOPMENT === 'true';
 import './Apprehensions.css';
 
 const Apprehensions = () => {
-    // console.log({ selectedState });
-    const [apprehensions, setApprehensions] = useState([]);
-
-    // TODO: Make this dynamic.
-    const totalCount = 265226;
-
-    const [pagination, setPagination] = useState({
-        pageIndex: 0, // starts at 0
-        pageSize: 10,
-    });
     const [states, setStates] = useState([]);
     const [selectedState, setSelectedState] = useState('ALABAMA');
 
@@ -36,20 +26,30 @@ const Apprehensions = () => {
                     console.error('Error fetching states:', error);
                 });
         }         
-        const start = (pagination.pageIndex * pagination.pageSize) + pagination.pageSize;
-        fetch(`${apiUrl}/api/apprehensions` + 
-            `?state=${selectedState}&start=${start}&end=${start + pagination.pageSize}&pageNumber=${pagination.pageIndex}`)
-            .then(response => response.json())
-            .then(data => {
-                setApprehensions(data);
-            })
-            .catch(error => {
-                console.error('Error fetching apprehensions:', error);
-            });
-    }, [selectedState, pagination]);
+    }, [selectedState]);
 
     return (
         <div>
+            <h3>Apprehensions in {selectedState}</h3>
+            <StateSelector 
+                states={states} 
+                onSelect={(state) => {
+                    setSelectedState(state);
+                }}
+            />
+            <a href="https://deportationdata.org/docs/ice.html#tables" target="_blank" rel="noopener noreferrer">
+                Click here for full explanation of tables on Deportation Data website
+            </a>
+                <PagedTable 
+                    headers={[{ header: "ID", accessorKey: "arrestId" },
+                        { header: "Gender", accessorKey: "gender" },
+                        { header: "Appr. Date", accessorKey: "apprehensionDate" },
+                        { header: "Appr. Criminality", accessorKey: "apprehensionCriminality" },
+                        { header: "Appr. Method", accessorKey: "apprehensionMethod" },
+                        { header: "Citizenship Country", accessorKey: "citizenshipCountry" },]
+                    }
+                    dataUrl={`${apiUrl}/api/apprehensions?state=${selectedState}`}
+                />
             {isDevelopment === true &&
             <>
                 <ProjectTask 
@@ -72,32 +72,6 @@ const Apprehensions = () => {
                 />
             </>
             }
-            <h3>Apprehensions in {selectedState} ({apprehensions.length})</h3>
-            {apprehensions.length === 0 &&
-                <p>No apprehensions found.</p>
-            }
-            <StateSelector 
-                states={states} 
-                onSelect={(state) => {
-
-                    setSelectedState(state);
-                }}
-            />
-
-            <PagedTable 
-                onTablePaginationChange={(updaterFunc) => {
-                    const newPagination = updaterFunc(pagination);
-                    setPagination(newPagination);
-                }}
-                headers={[{ header: "ID", accessorKey: "arrestId" },
-                    { header: "Gender", accessorKey: "gender" },
-                    { header: "Appr. Date", accessorKey: "apprehensionDate" },
-                    { header: "Appr. Criminality", accessorKey: "apprehensionCriminality" },
-                    { header: "Appr. Method", accessorKey: "apprehensionMethod" },
-                    { header: "Citizenship Country", accessorKey: "citizenshipCountry" },]
-                }
-                tableData={apprehensions}
-            />
         </div>
     );
 };

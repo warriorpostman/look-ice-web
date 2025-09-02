@@ -6,39 +6,14 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export default function Detainers() {
     const selectedState = "ALABAMA";
-    const [detainers, setDetainers] = useState([]);
-
-    const [pagination, setPagination] = useState({
-        pageIndex: 0, // starts at 0
-        pageSize: 10,
-    });
-
-    useEffect(() => {
-        console.log('Detainers component mounted with state:', selectedState);
-        const start = (pagination.pageIndex * pagination.pageSize) + pagination.pageSize;
-        fetch(`${apiUrl}/api/detainers` + 
-            `?state=${selectedState}&start=${start}&end=${start + pagination.pageSize}&pageNumber=${pagination.pageIndex}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log('Fetched detainers:', data);
-                setDetainers(data);
-            })
-            .catch(error => {
-                console.error('Error fetching detainers:', error);
-            });
-    }, [selectedState, pagination]);
 
     return (
         <div>
-            <h3>Apprehensions in {selectedState} ({detainers.length})</h3>
-            {detainers.length === 0 &&
-                <p>No apprehensions found.</p>
-            }
-
+            <h3>Detainers in {selectedState}</h3>
+            <p><em>TODO:</em> Add State selector</p>
             <PagedTable 
                 onTablePaginationChange={(updaterFunc) => {
                     const newState = updaterFunc(pagination);
-                    setPagination(newState);
                 }}
                 headers={[
                     { header: "ID", accessorKey: "detainerId" },
@@ -48,8 +23,7 @@ export default function Detainers() {
                     { header: "Appr. Method", accessorKey: "apprehensionMethod" },
                     { header: "Citizenship Country", accessorKey: "citizenshipCountry" },
                 ]}
-                tableData={detainers}
-
+                dataUrl={`${apiUrl}/api/detainers?state=${selectedState}`}
             />
         </div>
     );
