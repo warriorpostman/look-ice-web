@@ -41,15 +41,13 @@ const PagedTable = ({ headers, dataUrl, filters }) => {
             `${key}=${encodeURIComponent(filters[key])}`;
     });
     useEffect(() => {
-        console.log("effect")
         const currentUrl = `${dataUrl}?${queryString}&pageNumber=${pagination.pageIndex}`;
         const fetchData = fetch(currentUrl)
-        // console.log("url", currentUrl);
 
         fetchData
             .then(response => response.json())
             .then(data => {
-                console.log('Fetched data:', data);
+                // console.log('Fetched data:', data);
                 setTableData(data);
             })
             .catch(error => {
@@ -58,7 +56,6 @@ const PagedTable = ({ headers, dataUrl, filters }) => {
     }, [pagination.pageIndex]);
 
     useEffect(() => {
-        console.log('reset pages');
         setPagination({ pageIndex: 0, pageSize: 10 });
     }, [filters])
 

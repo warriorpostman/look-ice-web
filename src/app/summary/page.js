@@ -17,11 +17,10 @@ export default function Summary() {
         apprehensionsByCitizenshipCountry: [],
     });
     useEffect(() => {
-        console.log('App component mounted');
         fetch(`${apiUrl}/api/apprehensions/summary`)
             .then(response => response.json())
             .then(data => {
-                console.log('Fetched summary:', data);
+                // console.log('Fetched summary:', data);
                 setSummary(data);
             })
             .catch(error => {
@@ -34,12 +33,10 @@ export default function Summary() {
     let values = []
     if (summary.apprehensionsByState.length > 0) {
         topDataByState = summary.apprehensionsByState.slice(0, 15);
-        console.log(summary.apprehensionsByState.length);
         const remainingCount = summary.apprehensionsByState
             .slice(16, summary.apprehensionsByState.length)
             .reduce((acc, item) => acc = acc + item[1], 0);
         topDataByState.push(['All Other States', remainingCount]);
-        console.log(topDataByState);
         labels = topDataByState.map(item => item[0]);
         values = topDataByState.map(item => item[1]);
     }

@@ -7,11 +7,9 @@ import { useCallback } from 'react';
 import APPREHENSION_STATE_NAMES from './apprehensionStateNames.js';
 
 const StateSelector = ({ onSelect }) => {
-    // console.log(apprehensionStateNames);
     const [selectedState, setSelectedState] = useState('ALABAMA');
 
     const handleChange = useCallback((event) => {
-        // console.log("use cb state", event.target.value)
         setSelectedState(event.target.value);
         onSelect(event.target.value)
     }, []);

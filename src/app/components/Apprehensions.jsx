@@ -15,7 +15,6 @@ const Apprehensions = () => {
         <div>
             <h3>Apprehensions in {selectedState}</h3>
             <StateSelector 
-                // states={states} 
                 onSelect={(state) => {
                     setSelectedState(state);
                 }}
