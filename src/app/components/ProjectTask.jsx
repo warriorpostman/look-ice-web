@@ -12,9 +12,9 @@ const ProjectTask = ({ title, description, urgency, status }) => {
 
     return (
         <div className="project-task">
+            <div className={urgencyStyle}>{urgency}</div>
             <div>{title}</div>
             <div>{description}</div>
-            <div className={urgencyStyle}>{urgency}</div>
             <div>{status}</div>
         </div>
     ); 
