@@ -1,20 +1,22 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import PagedTable from '../components/PagedTable';
+import StateSelector from '../components/StateSelector';
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export default function Detainers() {
-    const selectedState = "ALABAMA";
+    const [selectedState, setSelectedState] = useState('ALABAMA');
 
     return (
         <div>
             <h3>Detainers in {selectedState}</h3>
-            <p><em>TODO:</em> Add State selector</p>
-            <PagedTable 
-                onTablePaginationChange={(updaterFunc) => {
-                    const newState = updaterFunc(pagination);
+            <StateSelector
+                onSelect={(state) => {
+                    setSelectedState(state);
                 }}
+            />
+            <PagedTable 
                 headers={[
                     { header: "ID", accessorKey: "detainerId" },
                     { header: "Gender", accessorKey: "gender" },
@@ -23,7 +25,8 @@ export default function Detainers() {
                     { header: "Appr. Method", accessorKey: "apprehensionMethod" },
                     { header: "Citizenship Country", accessorKey: "citizenshipCountry" },
                 ]}
-                dataUrl={`${apiUrl}/api/detainers?state=${selectedState}`}
+                dataUrl={`${apiUrl}/api/detainers`}
+                filters={{ state: selectedState }}
             />
         </div>
     );

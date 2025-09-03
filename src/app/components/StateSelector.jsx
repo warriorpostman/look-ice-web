@@ -4,11 +4,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useCallback } from 'react';
+import APPREHENSION_STATE_NAMES from './apprehensionStateNames.js';
 
-const StateSelector = ({ states, onSelect }) => {
-    const [selectedState, setSelectedState] = useState('');
+const StateSelector = ({ onSelect }) => {
+    // console.log(apprehensionStateNames);
+    const [selectedState, setSelectedState] = useState('ALABAMA');
 
     const handleChange = useCallback((event) => {
+        // console.log("use cb state", event.target.value)
         setSelectedState(event.target.value);
         onSelect(event.target.value)
     }, []);
@@ -18,7 +21,7 @@ const StateSelector = ({ states, onSelect }) => {
             <h3>Select a State:</h3>
             <select value={selectedState} onChange={handleChange}>
                 <option value="">--Select a state--</option>
-                {states.map((state, index) => (
+                {APPREHENSION_STATE_NAMES.map((state, index) => (
                     <option key={index} value={state}>
                         {state}
                     </option>
