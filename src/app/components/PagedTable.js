@@ -44,7 +44,7 @@ const PagedTable = ({ headers, dataUrl, filters }) => {
         console.log("effect")
         const currentUrl = `${dataUrl}?${queryString}&pageNumber=${pagination.pageIndex}`;
         const fetchData = fetch(currentUrl)
-        console.log("url", currentUrl);
+        // console.log("url", currentUrl);
 
         fetchData
             .then(response => response.json())
@@ -55,7 +55,12 @@ const PagedTable = ({ headers, dataUrl, filters }) => {
             .catch(error => {
                 console.error('Error fetching data:', error);
             });
-    }, [pagination.pageIndex, filters]);
+    }, [pagination.pageIndex]);
+
+    useEffect(() => {
+        console.log('reset pages');
+        setPagination({ pageIndex: 0, pageSize: 10 });
+    }, [filters])
 
     return (
         <div className="paged-table-container">
