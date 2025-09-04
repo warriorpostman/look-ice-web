@@ -5,9 +5,11 @@ import {
   flexRender,
   getPaginationRowModel,
 } from "@tanstack/react-table";
+import StateSelector from './StateSelector';
 import './PagedTable.css';
 
-const PagedTable = ({ headers, dataUrl, filters }) => {
+const PagedTable = ({ headers, dataUrl }) => {
+    const [selectedState, setSelectedState] = useState('ALABAMA');
     const [pagination, setPagination] = useState({
         pageIndex: 0, // starts at 0
         pageSize: 10,
@@ -34,14 +36,15 @@ const PagedTable = ({ headers, dataUrl, filters }) => {
         getPaginationRowModel: getPaginationRowModel(), // still needed for UI helpers        getCoreRowModel: getCoreRowModel(),
     });
 
+    const filters = { state: selectedState}
     let queryString = "";
     Object.keys(filters).forEach(key => {
         queryString = queryString + 
             `${queryString.length === 0 ? "" : "&"}` + 
             `${key}=${encodeURIComponent(filters[key])}`;
     });
+    const currentUrl = `${dataUrl}?${queryString}&pageNumber=${pagination.pageIndex}`;
     useEffect(() => {
-        const currentUrl = `${dataUrl}?${queryString}&pageNumber=${pagination.pageIndex}`;
         const fetchData = fetch(currentUrl)
 
         fetchData
@@ -53,14 +56,16 @@ const PagedTable = ({ headers, dataUrl, filters }) => {
             .catch(error => {
                 console.error('Error fetching data:', error);
             });
-    }, [pagination.pageIndex]);
-
-    useEffect(() => {
-        setPagination({ pageIndex: 0, pageSize: 10 });
-    }, [filters])
+    }, [pagination.pageIndex, selectedState]);
 
     return (
         <div className="paged-table-container">
+            <StateSelector 
+                onSelect={(state) => {
+                    setPagination({ pageIndex: 0, pageSize: 10 });
+                    setSelectedState(state);
+                }}
+            />
             <div className="pagination-controls">
                 <button onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
                 Previous

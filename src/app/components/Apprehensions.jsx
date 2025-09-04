@@ -9,16 +9,9 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 import './Apprehensions.css';
 
 const Apprehensions = () => {
-    const [selectedState, setSelectedState] = useState('ALABAMA');
-
     return (
         <div>
-            <h3>Apprehensions in {selectedState}</h3>
-            <StateSelector 
-                onSelect={(state) => {
-                    setSelectedState(state);
-                }}
-            />
+            <h3>Arrests</h3>
             <a href="https://deportationdata.org/docs/ice.html#tables" target="_blank" rel="noopener noreferrer">
                 Click here for full explanation of tables on Deportation Data website
             </a>
@@ -28,10 +21,9 @@ const Apprehensions = () => {
                     { header: "Appr. Date", accessorKey: "apprehensionDate" },
                     { header: "Appr. Criminality", accessorKey: "apprehensionCriminality" },
                     { header: "Appr. Method", accessorKey: "apprehensionMethod" },
-                    { header: "Citizenship Country", accessorKey: "citizenshipCountry" },]
-                }
+                    { header: "State", accessorKey: "apprehensionState" },
+                ]}
                 dataUrl={`${apiUrl}/api/apprehensions`}
-                filters={{ state: selectedState }}
             />
         </div>
     );
