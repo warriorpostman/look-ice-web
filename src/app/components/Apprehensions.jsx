@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react';
 import PagedTable from './PagedTable';
 import PropTypes from 'prop-types';
-import StateSelector from '../components/StateSelector';
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 import './Apprehensions.css';

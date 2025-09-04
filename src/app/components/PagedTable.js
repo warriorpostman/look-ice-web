@@ -62,8 +62,8 @@ const PagedTable = ({ headers, dataUrl }) => {
         <div className="paged-table-container">
             <StateSelector 
                 onSelect={(state) => {
-                    setPagination({ pageIndex: 0, pageSize: 10 });
                     setSelectedState(state);
+                    setPagination({ pageIndex: 0, pageSize: 10 });
                 }}
             />
             <div className="pagination-controls">
