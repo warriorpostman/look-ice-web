@@ -6,6 +6,7 @@ import {
   getPaginationRowModel,
 } from "@tanstack/react-table";
 import StateSelector from './StateSelector';
+import Spinner from './Spinner';
 import './PagedTable.css';
 
 const PagedTable = ({ headers, dataUrl }) => {
@@ -15,6 +16,7 @@ const PagedTable = ({ headers, dataUrl }) => {
         pageSize: 10,
     });
     const [tableData, setTableData] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     // TODO: Make this dynamic.
     const totalCount = 40000;
@@ -47,14 +49,17 @@ const PagedTable = ({ headers, dataUrl }) => {
     useEffect(() => {
         const fetchData = fetch(currentUrl)
 
+        setIsLoading(true);
         fetchData
             .then(response => response.json())
             .then(data => {
                 // console.log('Fetched data:', data);
                 setTableData(data);
+                setIsLoading(false);
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
+                setIsLoading(false);
             });
     }, [pagination.pageIndex, selectedState]);
 
@@ -67,16 +72,18 @@ const PagedTable = ({ headers, dataUrl }) => {
                 }}
             />
             <div className="pagination-controls">
-                <button onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
+                <button onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage() || isLoading}>
                 Previous
                 </button>
                 <span>
                 Page {pagination.pageIndex + 1} of {table.getPageCount()}
                 </span>
-                <button onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
+                <button onClick={() => table.nextPage()} disabled={!table.getCanNextPage() || isLoading}>
                 Next
                 </button>
+                <Spinner show={isLoading} />
             </div>
+            {tableData && tableData.length > 0 ? 
             <table>
                 <thead>
                     {table.getHeaderGroups().map((headerGroup) => (
@@ -104,6 +111,8 @@ const PagedTable = ({ headers, dataUrl }) => {
                     ))}
                 </tbody>
             </table>
+            : <div> Loading... </div>
+            }
         </div>
     );
 };
