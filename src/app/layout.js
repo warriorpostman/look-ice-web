@@ -48,18 +48,6 @@ export default function RootLayout({ children }) {
                     status="TODO" 
                 />
                 <ProjectTask 
-                    title="New URL with ice.zubinweb.com" 
-                    description="Create new certificate, update URLs to use zubinweb.com" 
-                    urgency="MEDIUM"
-                    status="TODO" 
-                />
-                <ProjectTask 
-                    title="Table paging controls" 
-                    description="Stylize the paging controls. They look dumb now" 
-                    urgency="MEDIUM"
-                    status="TODO" 
-                />
-                <ProjectTask 
                     title="Charts - Consider better labels" 
                     description="Title the charts appropriately" 
                     urgency="MEDIUM"
@@ -73,6 +61,7 @@ export default function RootLayout({ children }) {
                 />
             </>
             }
+        <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
       </body>
     </html>
   );
