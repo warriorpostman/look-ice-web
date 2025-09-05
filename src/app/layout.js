@@ -25,12 +25,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <h1>lookice</h1> 
-        <div style={{ display: 'flex' }}>
-          <div>
-            <Menu />
-          </div>
+        <main>
+          <Menu />
           {children}
-        </div>
+        </main>
 
             {isDevelopment === true &&
             <>
@@ -50,12 +48,6 @@ export default function RootLayout({ children }) {
                 <ProjectTask 
                     title="Charts - Consider better labels" 
                     description="Title the charts appropriately" 
-                    urgency="MEDIUM"
-                    status="TODO" 
-                />
-                <ProjectTask 
-                    title="Make menu mobile-friendly" 
-                    description="do a little research on the mobile-menu triggers three lines thingie" 
                     urgency="MEDIUM"
                     status="TODO" 
                 />
