@@ -4,9 +4,10 @@ import Link from 'next/link';
 import './Menu.css'
 
 const Menu = () => {
+    // TODO: explore why using nav here causes layout issues
+    // HINT: it's the user agent stylesheet in chrome
     return (
-        <div className="li-menu">
-            <h2>Menu</h2>
+        <nav className="li-menu">
             <ul>
                 <li><Link href="/">Home</Link></li>
                 <li><Link href="/apprehensions">Arrests</Link></li>
@@ -14,7 +15,7 @@ const Menu = () => {
                 <li><Link href="/summary">Charts</Link></li>
                 <li><Link href="/about">About</Link></li>
             </ul>
-        </div>
+        </nav>
     );
 };
 

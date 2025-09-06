@@ -16,11 +16,31 @@ const Apprehensions = () => {
             </a>
             <PagedTable 
                 headers={[{ header: "ID", accessorKey: "arrestId" },
-                    { header: "Gender", accessorKey: "gender" },
+                    { header: "Gender", accessorKey: "gender" ,
+                    // TODO: extract gender transform func
+                    cell: ({ cell, row }) => {
+                            let customValue = ''
+                            if (row.original.gender === "Male") {
+                                customValue = 'M';
+                            } else if (row.original.gender === "Female") {
+                                customValue = 'F' 
+                            }
+                        return customValue;
+                        }
+                    },
                     { header: "Appr. Date", accessorKey: "apprehensionDate" },
-                    { header: "Appr. Criminality", accessorKey: "apprehensionCriminality" },
+                    { 
+                        // TODO: extract func to transform criminality
+                        header: "Appr. Criminality", accessorKey: "apprehensionCriminality",
+                        cell: ({ cell, row }) => {
+                                const raw = row.original.apprehensionCriminality;
+                                let customValue = raw.substring(2,raw.length);
+                                return customValue;
+                            }
+                    },
                     { header: "Appr. Method", accessorKey: "apprehensionMethod" },
                     { header: "State", accessorKey: "apprehensionState" },
+                    { header: "Country", accessorKey: "citizenshipCountry" },
                 ]}
                 dataUrl={`${apiUrl}/api/apprehensions`}
             />

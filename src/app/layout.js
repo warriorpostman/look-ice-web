@@ -25,12 +25,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <h1>lookice</h1> 
-        <div style={{ display: 'flex' }}>
-          <div>
-            <Menu />
-          </div>
+        <main>
+          <Menu />
           {children}
-        </div>
+        </main>
 
             {isDevelopment === true &&
             <>
@@ -42,21 +40,15 @@ export default function RootLayout({ children }) {
                     status="TODO" 
                 />
                 <ProjectTask 
-                    title="Charts - Make country chart top 20" 
-                    description="Add the State filter to detainers" 
+                    title="Stylize paragraph in a nice way" 
+                    description="Stylize paragraph in a nice way"
                     urgency="HIGH"
                     status="TODO" 
                 />
                 <ProjectTask 
-                    title="New URL with ice.zubinweb.com" 
-                    description="Create new certificate, update URLs to use zubinweb.com" 
-                    urgency="MEDIUM"
-                    status="TODO" 
-                />
-                <ProjectTask 
-                    title="Table paging controls" 
-                    description="Stylize the paging controls. They look dumb now" 
-                    urgency="MEDIUM"
+                    title="Charts - Make country chart top 20" 
+                    description="Add the State filter to detainers" 
+                    urgency="HIGH"
                     status="TODO" 
                 />
                 <ProjectTask 
@@ -65,14 +57,9 @@ export default function RootLayout({ children }) {
                     urgency="MEDIUM"
                     status="TODO" 
                 />
-                <ProjectTask 
-                    title="Make menu mobile-friendly" 
-                    description="do a little research on the mobile-menu triggers three lines thingie" 
-                    urgency="MEDIUM"
-                    status="TODO" 
-                />
             </>
             }
+        <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
       </body>
     </html>
   );

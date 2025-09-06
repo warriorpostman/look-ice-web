@@ -1,14 +1,22 @@
 .li-menu > ul {
-    margin: 8px;
+    margin: 4px 8px 0px 16px;
     padding: 8px;
     border-radius: 6px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-.li-menu >ul > li {
+@media (max-width: 768px) {
+    .li-menu > ul {
+        display: flex;
+    }
+    .li-menu > ul > li {
+        padding: 2px;
+    }
+}
+
+.li-menu > ul > li {
     width: 100%;
-    cursor: pointer;
-    padding: 8px;
+    list-style: none;
 }
 
 .li-menu > ul > li > a:hover {
