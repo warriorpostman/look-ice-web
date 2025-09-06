@@ -40,6 +40,12 @@ export default function RootLayout({ children }) {
                     status="TODO" 
                 />
                 <ProjectTask 
+                    title="Stylize paragraph in a nice way" 
+                    description="Stylize paragraph in a nice way"
+                    urgency="HIGH"
+                    status="TODO" 
+                />
+                <ProjectTask 
                     title="Charts - Make country chart top 20" 
                     description="Add the State filter to detainers" 
                     urgency="HIGH"
