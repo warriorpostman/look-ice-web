@@ -10,6 +10,7 @@ import Spinner from './Spinner';
 import './PagedTable.css';
 
 const PagedTable = ({ headers, dataUrl }) => {
+    const [totalCount, setTotalCount] = useState(50);
     const [selectedState, setSelectedState] = useState('ALABAMA');
     const [pagination, setPagination] = useState({
         pageIndex: 0, // starts at 0
@@ -19,7 +20,6 @@ const PagedTable = ({ headers, dataUrl }) => {
     const [isLoading, setIsLoading] = useState(false);
 
     // TODO: Make this dynamic.
-    const totalCount = 40000;
     const columns = React.useMemo(
         () => headers,
         []
@@ -52,9 +52,14 @@ const PagedTable = ({ headers, dataUrl }) => {
         setIsLoading(true);
         fetchData
             .then(response => response.json())
-            .then(data => {
-                // console.log('Fetched data:', data);
-                setTableData(data);
+            .then(result => {
+                // console.log('Fetched data:', result);
+                if (result.count !== undefined && result.data !== undefined) {
+                    setTableData(result.data);
+                    setTotalCount(result.count);
+                } else {
+                    setTableData(result);
+                }
             })
             .catch(error => {
                 console.error('Error fetching data:', error);

@@ -16,7 +16,6 @@ export default function Detainers() {
                     { header: "Appr. Date", accessorKey: "apprehensionDate",
                         cell: ({ cell, row }) => {
                             const raw = row.original.apprehensionDate;
-                            console.log('raw    ', raw);
                             if (raw === null) {
                                 return 'n/a';
                             }
