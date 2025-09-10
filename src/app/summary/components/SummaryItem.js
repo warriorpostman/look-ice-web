@@ -1,11 +1,19 @@
 import React from 'react';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { 
+    Chart as ChartJS, 
+    ArcElement, 
+    Tooltip, 
+    Legend, 
+    BarElement,
+    LinearScale,
+    CategoryScale
+} from 'chart.js';
 import { Pie } from 'react-chartjs-2';
-ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(ArcElement, Tooltip, Legend, LinearScale, CategoryScale, BarElement);
 
 import './SummaryItem.css';
 
-const SummaryItem = ({ title, labels, values }) => {
+const SummaryItem = ({ title, labels, values, type = "pie" }) => {
     const data = {
         labels: labels, 
         datasets: [
@@ -18,8 +26,7 @@ const SummaryItem = ({ title, labels, values }) => {
 
     return (
         <div>
-
-        <h3>{title}</h3>
+        {/* <h3>{title}</h3> */}
         <div className="summary-item">
             <div className="summary-table">
                 <table>
@@ -38,8 +45,22 @@ const SummaryItem = ({ title, labels, values }) => {
             <div className="summary-chart">
                 <Pie 
                     data={data} 
-                    width={"200px"}
-                    height={"200px"}
+                    width={"250px"}
+                    height={"250px"}
+                    options={{
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: title
+                            },
+                            datalabels: {
+                                color: '#fff',
+                                anchor: 'center',
+                                align: 'center',
+                            }
+                        }
+                    }}
                 />
             </div>
         </div>

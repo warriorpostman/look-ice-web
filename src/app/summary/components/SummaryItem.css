@@ -7,7 +7,7 @@
 }
 
 .summary-chart {
-    flex: 2;
+    flex: .75;
 }
 
 .summary-table {
