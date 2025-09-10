@@ -46,12 +46,6 @@ export default function RootLayout({ children }) {
                     status="TODO" 
                 />
                 <ProjectTask 
-                    title="Charts - Make country chart top 20" 
-                    description="Add the State filter to detainers" 
-                    urgency="HIGH"
-                    status="TODO" 
-                />
-                <ProjectTask 
                     title="Charts - Consider better labels" 
                     description="Title the charts appropriately" 
                     urgency="MEDIUM"

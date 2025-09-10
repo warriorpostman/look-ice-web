@@ -55,10 +55,10 @@ const PagedTable = ({ headers, dataUrl }) => {
             .then(data => {
                 // console.log('Fetched data:', data);
                 setTableData(data);
-                setIsLoading(false);
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
+            }).finally(() => {
                 setIsLoading(false);
             });
     }, [pagination.pageIndex, selectedState]);

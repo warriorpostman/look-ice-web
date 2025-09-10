@@ -13,11 +13,29 @@ export default function Detainers() {
                 headers={[
                     { header: "ID", accessorKey: "detainerId" },
                     { header: "Gender", accessorKey: "gender" },
-                    { header: "Appr. Date", accessorKey: "apprehensionDate" },
-                    { header: "Det. Prep. Criminality", accessorKey: "detainerPreparedCriminality" },
+                    { header: "Appr. Date", accessorKey: "apprehensionDate",
+                        cell: ({ cell, row }) => {
+                            const raw = row.original.apprehensionDate;
+                            console.log('raw    ', raw);
+                            if (raw === null) {
+                                return 'n/a';
+                            }
+
+                            let customValue = new Date(raw).toLocaleDateString();
+                            return customValue;
+                        }
+                    },
+                    { header: "Det. Prep. Criminality", accessorKey: "detainerPreparedCriminality" ,
+                        cell: ({ cell, row }) => {
+                                const raw = row.original.detainerPreparedCriminality;
+                                let customValue = raw.substring(2,raw.length);
+                                return customValue;
+                            }
+
+                    },
                     { header: "Appr. Method", accessorKey: "apprehensionMethod" },
                     { header: "Citizenship Country", accessorKey: "citizenshipCountry" },
-                    { header: "Facility State", accessorKey: "facilityState" },
+                    // { header: "Facility State", accessorKey: "facilityState" },
                 ]}
                 dataUrl={`${apiUrl}/api/detainers`}
             />

@@ -28,7 +28,13 @@ const Apprehensions = () => {
                         return customValue;
                         }
                     },
-                    { header: "Appr. Date", accessorKey: "apprehensionDate" },
+                    { header: "Appr. Date", accessorKey: "apprehensionDate",
+                        cell: ({ cell, row }) => {
+                            const raw = row.original.apprehensionDate;
+                            let customValue = new Date(raw).toLocaleDateString();
+                            return customValue;
+                        }
+                     },
                     { 
                         // TODO: extract func to transform criminality
                         header: "Appr. Criminality", accessorKey: "apprehensionCriminality",
@@ -39,7 +45,7 @@ const Apprehensions = () => {
                             }
                     },
                     { header: "Appr. Method", accessorKey: "apprehensionMethod" },
-                    { header: "State", accessorKey: "apprehensionState" },
+                    // { header: "State", accessorKey: "apprehensionState" },
                     { header: "Country", accessorKey: "citizenshipCountry" },
                 ]}
                 dataUrl={`${apiUrl}/api/apprehensions`}
