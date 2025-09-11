@@ -47,12 +47,13 @@ const ArrestsByMonth = ({ labels, values }) => (
                     legend: { display: false },
                     title: {
                         display: true,
-                        text: 'Arrest by Month and Year 2023 - 2025',
+                        text: 'Monthly Arrests',
                     },
                 },
                 scales: {
                     y: {
                         beginAtZero: true,
+                        title: { display: true, text: 'Number of Arrests' }
                     },
                 },
             }}

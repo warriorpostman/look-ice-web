@@ -34,15 +34,45 @@ export default function RootLayout({ children }) {
             <>
                 <h3>TASKS</h3>
                 <ProjectTask 
-                    title="Make total record count dynamic" 
-                    description="Total record count is hard-coded right now. Compose the count with paged table data in a table result."
+                    title="Remove duplicate arrests" 
+                    description="DeportationData site says there's duplicate arrets. See what's needed to remove them"
                     urgency="HIGH"
+                    status="TODO" 
+                />
+                <ProjectTask 
+                    title="Mobile device orientation with media query" 
+                    description="Message to suggest rotating device to landscape for better experience"
+                    urgency="HIGH"
+                    status="TODO" 
+                />
+                <ProjectTask 
+                    title="Make charts display: block on mobile devices" 
+                    description="Make charts display: block on mobile devices"
+                    urgency="HIGH"
+                    status="TODO" 
+                />
+                <ProjectTask 
+                    title="Parse criminality statuses to be user friendly" 
+                    description="Parse criminality statuses to be user friendly with function"
+                    urgency="HIGH"
+                    status="TODO" 
+                />
+                <ProjectTask 
+                    title="Add dummy logo to header" 
+                    description="Look at logoipsum for dummy logo"
+                    urgency="MEDIUM"
+                    status="TODO" 
+                />
+                <ProjectTask 
+                    title="Maybe add labels/percentages to pie charts" 
+                    description="Add labels/percentages to pie charts"
+                    urgency="MEDIUM"
                     status="TODO" 
                 />
                 <ProjectTask 
                     title="Stylize paragraph in a nice way" 
                     description="Stylize paragraph in a nice way"
-                    urgency="HIGH"
+                    urgency="MEDIUM"
                     status="TODO" 
                 />
                 <ProjectTask 
