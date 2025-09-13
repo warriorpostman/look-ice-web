@@ -23,7 +23,13 @@
     color: black;
 }
 
+.li-menu > ul > li > a.current-link{
+    color: rgb(212, 76, 26);
+    font-weight: bold;
+}
+
 .li-menu > ul > li:hover {
     width: 100%;
     background-color: lightgray;
 }
+

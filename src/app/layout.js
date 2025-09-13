@@ -34,12 +34,6 @@ export default function RootLayout({ children }) {
             <>
                 <h3>TASKS</h3>
                 <ProjectTask 
-                    title="Highlight menu item for current page" 
-                    description="Highlight menu item for current page"
-                    urgency="HIGH"
-                    status="TODO" 
-                />
-                <ProjectTask 
                     title="Update text on homepage" 
                     description="Just one sentence right now. Clean it up and make it better"
                     urgency="HIGH"
