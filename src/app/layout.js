@@ -40,12 +40,6 @@ export default function RootLayout({ children }) {
             <>
                 <h3>TASKS</h3>
                 <ProjectTask 
-                    title="Update text on homepage" 
-                    description="Just one sentence right now. Clean it up and make it better"
-                    urgency="HIGH"
-                    status="TODO" 
-                />
-                <ProjectTask 
                     title="Remove duplicate arrests" 
                     description="DeportationData site says there's duplicate arrets. See what's needed to remove them"
                     urgency="HIGH"
@@ -54,12 +48,6 @@ export default function RootLayout({ children }) {
                 <ProjectTask 
                     title="Maybe add labels/percentages to pie charts" 
                     description="Add labels/percentages to pie charts"
-                    urgency="MEDIUM"
-                    status="TODO" 
-                />
-                <ProjectTask 
-                    title="Stylize paragraph in a nice way" 
-                    description="Stylize paragraph in a nice way"
                     urgency="MEDIUM"
                     status="TODO" 
                 />
