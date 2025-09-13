@@ -8,7 +8,6 @@ import {
     LinearScale,
     CategoryScale
 } from 'chart.js';
-// import { Bar } from 'react-chartjs-2';
 ChartJS.register(
     ArcElement, 
     Tooltip, 
@@ -40,14 +39,14 @@ const ArrestsByMonth = ({ labels, values }) => (
                     },
                 ],
             }}
-            width={"600px"}
+            width={"500px"}
             height={"200px"}
             options={{
                 plugins: {
                     legend: { display: false },
                     title: {
                         display: true,
-                        text: 'Monthly Arrests',
+                        text: 'Monthly Arrests (2023-2025)',
                     },
                 },
                 scales: {

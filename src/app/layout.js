@@ -52,18 +52,6 @@ export default function RootLayout({ children }) {
                     status="TODO" 
                 />
                 <ProjectTask 
-                    title="Mobile device orientation with media query" 
-                    description="Message to suggest rotating device to landscape for better experience"
-                    urgency="HIGH"
-                    status="TODO" 
-                />
-                <ProjectTask 
-                    title="Make charts display: block on mobile devices" 
-                    description="Make charts display: block on mobile devices"
-                    urgency="HIGH"
-                    status="TODO" 
-                />
-                <ProjectTask 
                     title="Parse criminality statuses to be user friendly" 
                     description="Parse criminality statuses to be user friendly with function"
                     urgency="HIGH"

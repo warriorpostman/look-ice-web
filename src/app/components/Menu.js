@@ -25,7 +25,7 @@ const Menu = () => {
                 {linkProps.map((link, index) => (
                     <li key={link.href}>
                         <Link
-                            className={activeIndex === index && "current-link"}
+                            className={activeIndex === index ? "current-link" : ""}
                             href={link.href}
                             onClick={() => handleLinkClick(index)}
                         >

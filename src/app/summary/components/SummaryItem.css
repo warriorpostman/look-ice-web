@@ -1,17 +1,17 @@
 .summary-item {
     border: solid 1px #ccc;
     border-radius: 5px;
-    padding: 12px;
+    padding: 8px;
     display: flex;
     justify-content: space-between;
 }
 
 .summary-chart {
-    flex: .75;
+    /* flex: .75; */
 }
 
-.summary-table {
+/* .summary-table {
     flex-basis:25%;
     flex: 1 1 auto;
-}
+} */
 

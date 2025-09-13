@@ -1,11 +1,36 @@
 .summary-container {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 8px;
+}
+
+.device-orientation-message {
+    color: red;
+    text-wrap: wrap;
+    font-weight: bold;
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .summary-container {
+        flex-direction: column;
+    }
+
+    .device-orientation-message {
+        display: block;
+    }
+}
+
+.criminality-explanation {
+    font-size: 12px;
+    margin: 12px 0px 0px 24px;
+}
+
+.criminality-explanation > p {
+    font-size: inherit;
 }
 
 .summary-container > div {
-    flex: 1;
-    /* flex-basis: 25%; */
+    flex-basis: 31%;
 }

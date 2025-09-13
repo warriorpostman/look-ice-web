@@ -50,7 +50,7 @@ const options = {
 return (
     <div className="summary-item" style={{ flex: 3 }}>
         <Bar data={data} options={options} 
-                width={"400px"}
+                width={"360px"}
                 height={"200px"}
         />
     </div>);

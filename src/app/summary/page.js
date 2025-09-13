@@ -62,9 +62,12 @@ export default function Summary() {
         <div>
             <h2>Arrest Summaries</h2>
             <div className="summary-container">
+                <p className='device-orientation-message'>
+                    Please rotate your device for a better experience
+                </p>
                 {summary.apprehensionsByGender.length !== 0 ?
                     <SummaryItem 
-                        title="Count By Gender" 
+                        title="Arrests By Gender" 
                         labels={summary.apprehensionsByGender.map(values => values[0])}
                         values={summary.apprehensionsByGender.map(values => values[1])}
                         data={{
@@ -80,19 +83,38 @@ export default function Summary() {
                     : <div> Loading... </div>}
                 {summary.apprehensionsByCriminality.length !== 0 ?
                     <SummaryItem 
-                        title="Count By Criminality" 
-                        labels={summary.apprehensionsByCriminality.map(values => values[0])}
+                        title="Criminal Status of Arrests" 
+                        labels={summary.apprehensionsByCriminality.map(values => {
+                            let transformed = values[0].substring(2,values[0].length);
+                            return transformed;
+                            // return values[0]; 
+                        })}
                         values={summary.apprehensionsByCriminality.map(values => values[1])}
                         data={{
-                            labels: summary.apprehensionsByCriminality.map(values => values[0]), // summary.apprehensionsByState.length > 0 ? summary.apprehensionsByState.map(value => value[0]) : [],
+                            labels: summary.apprehensionsByCriminality.map(values => values[0]), 
+                            // summary.apprehensionsByState.length > 0 ? summary.apprehensionsByState.map(value => value[0]) : [],
                             datasets: [
                                 {
-                                data: summary.apprehensionsByCriminality.map(values => values[1]), // summary.apprehensionsByState.length > 0 ? summary.apprehensionsByState.map(value => value[1]) : [],
+                                data: summary.apprehensionsByCriminality.map(values => values[1]), 
+                                // summary.apprehensionsByState.length > 0 ? summary.apprehensionsByState.map(value => value[1]) : [],
                                 backgroundColor: ['#0088FE', '#00C49F', '#FFBB28'],
                                 },
                         ],
                         }} 
-                    />
+                    >
+                        <div className="criminality-explanation">
+                            The three labels indicate an individual has:
+                             <ul>
+                                <li>at least one criminal conviction</li>
+                                <li>no criminal convictions but at least one criminal charge</li>
+                                <li>no charges or convictions ("other immigration violator")</li>
+                            </ul>
+                            <p>
+                                See more about the data used in these charts at deportationdata.org's <a href="https://deportationdata.org/docs/ice/codebook.html"> 
+                                data codebook</a>
+                            </p>
+                        </div>
+                    </SummaryItem>
                     : <div> Loading... </div>}
                 {summary.apprehensionsByState.length !== 0 ?
                     <ArrestsByState 

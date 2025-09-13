@@ -13,7 +13,7 @@ ChartJS.register(ArcElement, Tooltip, Legend, LinearScale, CategoryScale, BarEle
 
 import './SummaryItem.css';
 
-const SummaryItem = ({ title, labels, values, type = "pie" }) => {
+const SummaryItem = ({ title, labels, values, type = "pie", children }) => {
     const data = {
         labels: labels, 
         datasets: [
@@ -26,10 +26,11 @@ const SummaryItem = ({ title, labels, values, type = "pie" }) => {
 
     return (
         <div>
-        {/* <h3>{title}</h3> */}
         <div className="summary-item">
-            <div className="summary-table">
-                <table>
+            {/* 
+            NOT THIS table is needed if values can be seen on the chart
+            <div className="summary-table"> */}
+                {/* <table>
                     <thead><tr><th>STATE</th><th>Count</th></tr></thead>
                     <tbody>
                         {labels.map((label, index) => (
@@ -39,9 +40,9 @@ const SummaryItem = ({ title, labels, values, type = "pie" }) => {
                             </tr>
                         ))}
                     </tbody>
-                </table>
+                </table> */}
             
-            </div>
+            {/* </div> */}
             <div className="summary-chart">
                 <Pie 
                     data={data} 
@@ -62,6 +63,9 @@ const SummaryItem = ({ title, labels, values, type = "pie" }) => {
                         }
                     }}
                 />
+            <div>
+                {children}
+            </div>
             </div>
         </div>
         </div>
