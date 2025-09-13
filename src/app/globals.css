@@ -12,11 +12,19 @@
 
 main {
   display: flex;
+  margin: 16px 48px;
+}
+
+.site-header {
+  justify-content: center;
+  display: flex;
+  gap: 16px;
 }
 
 @media (max-width: 768px) {
   main {
     display: block;
+    margin: 8px;
   }
 }
 
