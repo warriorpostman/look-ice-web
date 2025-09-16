@@ -40,18 +40,6 @@ export default function RootLayout({ children }) {
             <>
                 <h3>TASKS</h3>
                 <ProjectTask 
-                    title="Instead of caching, used materialized views" 
-                    description="Use materialized views in Postgres instead of caching in Spring Boot"
-                    urgency="HIGH"
-                    status="TODO" 
-                />
-                <ProjectTask 
-                    title="Add basic caching for summary data" 
-                    description="Add caching in Spring boot service"
-                    urgency="HIGH"
-                    status="TODO" 
-                />
-                <ProjectTask 
                     title="Add removals data" 
                     description="Removals data is questionable, but we should add it, and add an asterisk with note" 
                     urgency="HIGH"
