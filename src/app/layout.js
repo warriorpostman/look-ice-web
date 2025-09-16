@@ -40,21 +40,39 @@ export default function RootLayout({ children }) {
             <>
                 <h3>TASKS</h3>
                 <ProjectTask 
-                    title="Remove duplicate arrests" 
-                    description="DeportationData site says there's duplicate arrets. See what's needed to remove them"
+                    title="Instead of caching, used materialized views" 
+                    description="Use materialized views in Postgres instead of caching in Spring Boot"
                     urgency="HIGH"
                     status="TODO" 
                 />
                 <ProjectTask 
-                    title="Maybe add labels/percentages to pie charts" 
+                    title="Add basic caching for summary data" 
+                    description="Add caching in Spring boot service"
+                    urgency="HIGH"
+                    status="TODO" 
+                />
+                <ProjectTask 
+                    title="Add removals data" 
+                    description="Removals data is questionable, but we should add it, and add an asterisk with note" 
+                    urgency="HIGH"
+                    status="TODO" 
+                />
+                <ProjectTask 
+                    title="Remove duplicate arrests" 
+                    description="DeportationData site says there's duplicate arrets. See what's needed to remove them"
+                    urgency="LOW"
+                    status="TODO" 
+                />
+                <ProjectTask 
+                    title="Maybe add labels/percentages directly to pie charts" 
                     description="Add labels/percentages to pie charts"
-                    urgency="MEDIUM"
+                    urgency="LOW"
                     status="TODO" 
                 />
                 <ProjectTask 
                     title="Charts - Consider better labels" 
-                    description="Title the charts appropriately" 
-                    urgency="MEDIUM"
+                    description="Title the charts appropriately and label axes as needed" 
+                    urgency="LOW"
                     status="TODO" 
                 />
             </>
