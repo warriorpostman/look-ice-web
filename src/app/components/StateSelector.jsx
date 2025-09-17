@@ -17,7 +17,7 @@ const StateSelector = ({ onSelect }) => {
                     onSelect(event.target.value)
                 }}>
                 <option value="">--Select a state--</option>
-                {APPREHENSION_STATE_NAMES.map((state, index) => (
+                {APPREHENSION_STATE_NAMES.sort().map((state, index) => (
                     <option key={index} value={state}>
                         {state}
                     </option>

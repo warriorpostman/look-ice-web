@@ -40,6 +40,12 @@ export default function RootLayout({ children }) {
             <>
                 <h3>TASKS</h3>
                 <ProjectTask 
+                    title="Read useEffect docs and overreacted.io blog post" 
+                    description="Understand the useEffect hook and its implications in React applications" 
+                    urgency="HIGH"
+                    status="TODO" 
+                />
+                <ProjectTask 
                     title="Add removals data" 
                     description="Removals data is questionable, but we should add it, and add an asterisk with note" 
                     urgency="HIGH"
